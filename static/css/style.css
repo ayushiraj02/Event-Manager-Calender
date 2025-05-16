@@ -1,0 +1,137 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 10px;
+  margin: 0;
+  background: #f9f9f9;
+}
+
+h1, h2, h4, h5 {
+  margin-bottom: 15px;
+}
+
+.calendar .days {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 168px; /* 6 rows x 28px */
+  align-content: flex-start;
+}
+
+.calendar .day {
+  width: 14.28%;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 3px; /* small spacing between days */
+}
+
+.calendar .day a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: black;
+  text-decoration: none;
+}
+
+.calendar .day a:hover {
+  text-decoration: underline;
+}
+
+.event-day {
+  border-radius: 50%;
+  padding: 4px;
+  color: white;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.calendar .weekdays {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.calendar .weekdays div {
+  width: 14.28%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.month {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  /* Fix height so all months have the same height */
+  height: 250px;
+}
+
+.day.selected {
+  outline: 1px solid #007bff;
+  background: azure;
+}
+
+/* Scroll event list if long */
+.event-list-container {
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+/* Responsive Adjustments */
+
+@media (max-width: 992px) {
+  .month {
+    height: auto; /* Let height auto on smaller screens to avoid overflow */
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar .day, .event-day {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+  }
+
+  /* .calendar .weekdays div {
+    font-size: 0.75em;
+  } */
+
+  .calendar .weekdays div {
+    width: 14.28%;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.7em;
+    padding: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 576px) {
+    .calendar .weekdays div {
+        font-size: 0.75em;
+        padding: 1px 0;
+    }
+}
+
+
+
+
+}
+
+/* .calendar .weekdays div {
+    margin: 0 2px;
+    font-size: 0.85em;
+    white-space: nowrap;
+} */
+
