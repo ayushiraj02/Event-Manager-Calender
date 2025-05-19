@@ -1,21 +1,18 @@
     # im working on a calendar app with Flask and MySQL, it has features like adding, deleting, and updating events.now i want to connect events list to db by making tables and inserting data into them.  i want to use mysql.connector to connect to the database and create tables. from flask import Flask, render_template, request, redirect, url_for
-from flask import Flask, render_template, request, redirect, url_for
-import calendar
-from datetime import datetime, date
-app = Flask(__name__)
 
-    # Add these new imports at the top
-import mysql.connector
-from mysql.connector import Error
-from flask import g
-import os
-from dotenv import load_dotenv
-load_dotenv()
+
+
+
 import mysql.connector
 from mysql.connector import Error
 from flask import Flask, g
 import os
 from dotenv import load_dotenv
+from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime, date
+import calendar
+import os
+from flask import jsonify
 
 load_dotenv()
 
@@ -29,6 +26,8 @@ CATEGORY_COLORS = {
     }
 
 events = []
+print(events,"events[]")
+# Function to group dates into ranges
 def group_dates(dates):
         dates = sorted(dates)
         grouped = []
@@ -40,6 +39,8 @@ def group_dates(dates):
                 grouped.append((start, end))
                 start = end = current
         grouped.append((start, end))
+        print(grouped,"grouped")
+        # Convert to list of dictionaries
         return grouped
 
 
@@ -171,15 +172,25 @@ def add_event():
 
 
 
-@app.route('/delete_event/<int:event_id>', methods=['POST'])
-def delete_event(event_id):
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute("DELETE FROM events WHERE id = %s", (event_id,))
-    db.commit()
-    cursor.close()
-    return ('', 204)
-    
+# @app.route('/delete_event/<int:event_id>', methods=['POST'])
+# def delete_event(event_id):
+#     db = get_db()
+#     cursor = db.cursor()
+#     cursor.execute("DELETE FROM events WHERE id = %s", (event_id,))
+#     db.commit()
+#     cursor.close()
+#     return ('', 204)
+
+
+@app.route('/delete_event/', methods=['POST'])
+def delete_event():
+    data = request.get_json()
+    event_id = data.get('id')
+    # Assuming you have some events list or DB from which to delete
+    global events
+    events = [event for event in events if event.get('id') != event_id]
+    print(f"Deleted event with id: {event_id}")
+    return jsonify({'status': 'success'})
 
 
 @app.route('/update_event', methods=['POST'])
@@ -188,7 +199,7 @@ def update_event():
     event_id = int(request.form.get('event_id'))
     event_title = request.form.get('event_title')
     category = request.form.get('category')
-    print(event_id, event_title, category,"-------------------")
+    print(event_id,"id", "titlt", event_title, category,"-------------------")
 
     db = get_db()
     cursor = db.cursor()

@@ -40,17 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     editButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            
             const idx = btn.getAttribute('data-event-index');
             console.log('Edit button clicked for index:', idx);
 
+            if (!events) {
+                console.error('events is undefined!');
+                return;
+            }
+            console.log('Available events:', events);
 
             const event = events[idx];
-            console.log('Event data:', event);
+            console.log('Event data at index', idx, ':', event);
 
+            if (!event) {
+                alert(`Event not found for index ${idx}`);
+                return;
+            }
 
             modalEventIndexInput.value = idx;
-            modalTitleInput.value = event.title;
+            modalTitleInput.value = event.event_title; 
             modalCategorySelect.value = event.category;
             modalDatesDiv.innerHTML = event.dates.map(d => (new Date(d)).toLocaleDateString()).join(', ');
 
@@ -58,15 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    deleteButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const idx = btn.getAttribute('data-event-index');
-            if (confirm('Are you sure you want to delete this event?')) {
-                fetch(`/delete_event/${idx}`, { method: 'POST' })
-                .then(() => window.location.reload());
-            }
-        });
-    });
+
+    // deleteButtons.forEach(btn => {
+    //     btn.addEventListener('click', () => {
+    //         const idx = btn.getAttribute('data-event-index');
+    //         if (confirm('Are you sure you want to delete this event?')) {
+    //             fetch(`/delete_event/${idx}`, { method: 'POST' })
+    //             .then(() => window.location.reload());
+    //         }
+    //     });
+    // });
+
 
     // Cancel buttons close modal
     document.getElementById('modalCancelBtn').addEventListener('click', () => modal.modal('hide'));
