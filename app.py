@@ -185,12 +185,18 @@ def add_event():
 @app.route('/delete_event/', methods=['POST'])
 def delete_event():
     data = request.get_json()
-    event_id = data.get('id')
-    # Assuming you have some events list or DB from which to delete
+    print("Raw data:", request.data)
+    print("JSON data:", request.get_json())
+    if not data or 'id' not in data:
+        return jsonify({'status': 'error', 'message': 'Invalid request'}), 400
+
+    event_id = data['id']
     global events
     events = [event for event in events if event.get('id') != event_id]
     print(f"Deleted event with id: {event_id}")
     return jsonify({'status': 'success'})
+
+
 
 
 @app.route('/update_event', methods=['POST'])
@@ -211,15 +217,6 @@ def update_event():
     db.commit()
     cursor.close()
     return redirect(url_for('index', year=datetime.now().year))
-
-
-# @app.route('/calendar')
-# def calendar():
-#     events = [
-#         {"title": "Meeting", "category": "Work"},
-#         {"title": "Birthday", "category": "Personal"}
-#     ]
-#     return render_template('calendar.html', events=events)
 
 
 if __name__ == '__main__':
