@@ -3,6 +3,12 @@
   <h1 style="color: #2c3e50;">📅 Event Calendar Web App</h1>
   <p>A responsive and interactive <strong>Event Calendar Web Application</strong> built with <strong>Flask</strong>, <strong>SQLite</strong>, <strong>Bootstrap</strong>, and <strong>JavaScript</strong>. This app allows users to <em>view, add, edit, and delete events on specific calendar dates</em>, grouped by categories with customizable colors.</p>
 
+  <div style="text-align: center; margin: 30px 0;">
+    <img src="img.png" alt="Calendar Web App Screenshot" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <p style="font-size: 14px; color: #7f8c8d;">Screenshot of the Event Calendar Web Application</p>
+  </div>
+  
+
   <h2 style="color: #34495e;">✨ Features</h2>
   <ul>
     <li>📅 <strong>Dynamic Yearly Calendar</strong> — users can select the year to view the calendar.</li>
