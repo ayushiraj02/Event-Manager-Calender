@@ -16,7 +16,7 @@
     <li>📝 <strong>Edit Events</strong> — update event title, category, and dates through a modal interface.</li>
     <li>❌ <strong>Delete Events</strong> — remove events directly from the event list.</li>
     <li>🎨 <strong>Category Color Coding</strong> — categories are color-coded for easy visual distinction.</li>
-    <li>📑 <strong>Event List Sidebar</strong> — displays a sorted list of all added events with category badges.</li>
+    <li>📑 <strong>Event List Sidebar</strong> — displays a sorted list of all added events with category badge.</li>
     <li>📊 <strong>SQLite Database</strong> — lightweight backend for storing event details.</li>
   </ul>
 
